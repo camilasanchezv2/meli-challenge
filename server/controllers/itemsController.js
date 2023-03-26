@@ -55,32 +55,41 @@ const getItem = (req, res) => {
       axios.get(`https://api.mercadolibre.com/items/${id}/description`),
     ])
     .then(
-      axios.spread(({ data: dataResponse }, { data: descriptionResponse }) => {
-        const price = dataResponse.price.toString().split(".");
+      axios.spread(
+        async ({ data: dataResponse }, { data: descriptionResponse }) => {
+          await axios
+            .get(
+              `https://api.mercadolibre.com/categories/${dataResponse.category_id}`
+            )
+            .then(({ data: categoryResponse }) => {
+              const price = dataResponse.price.toString().split(".");
 
-        const result = {
-          author: {
-            name: "Camila",
-            lastName: "Sánchez",
-          },
-          item: {
-            id,
-            title: dataResponse.title,
-            price: {
-              currency: dataResponse.currency_id,
-              amount: parseInt(price[0] || 0),
-              decimals: parseInt(price[1] || 0),
-            },
-            picture: dataResponse.thumbnail,
-            condition: dataResponse.condition,
-            free_shipping: dataResponse.free_shipping,
-            sold_quantity: dataResponse.sold_quantity,
-            description: descriptionResponse.plain_text,
-          },
-        };
+              const result = {
+                author: {
+                  name: "Camila",
+                  lastName: "Sánchez",
+                },
+                item: {
+                  id,
+                  title: dataResponse.title,
+                  price: {
+                    currency: dataResponse.currency_id,
+                    amount: parseInt(price[0] || 0),
+                    decimals: parseInt(price[1] || 0),
+                  },
+                  picture: dataResponse.thumbnail,
+                  condition: dataResponse.condition,
+                  free_shipping: dataResponse.free_shipping,
+                  sold_quantity: dataResponse.sold_quantity,
+                  description: descriptionResponse.plain_text,
+                  categories: categoryResponse.path_from_root,
+                },
+              };
 
-        return res.status(200).send(result);
-      })
+              return res.status(200).send(result);
+            });
+        }
+      )
     )
     .catch(({ response }) => {
       const status = response?.status || 400;

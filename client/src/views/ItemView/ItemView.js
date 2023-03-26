@@ -15,7 +15,7 @@ export const ItemView = () => {
   if (error) return <Error />;
 
   return (
-    <ContentWrapper>
+    <ContentWrapper breadcrumb={data.item.categories}>
       <Item item={data.item} />
     </ContentWrapper>
   );
