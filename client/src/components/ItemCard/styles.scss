@@ -1,0 +1,38 @@
+.item-card {
+  display: grid;
+  grid-template-columns: 180px auto 180px;
+  margin: 0 14px;
+  padding: 16px 0;
+  gap: 16px;
+  border-top: 1px solid var(--light);
+  cursor: pointer;
+
+  .thumbnail {
+    border-radius: 4px;
+    width: 180px;
+    height: 180px;
+  }
+
+  .price-container {
+    display: flex;
+    align-items: center;
+    margin: 14px 0;
+    font-size: 24px;
+
+    .free-shipping {
+      width: 20px;
+      margin-left: 8px;
+    }
+  }
+
+  .item-title {
+    font-weight: normal;
+    font-size: 18px;
+  }
+
+  .state {
+    margin-top: 28px;
+    color: var(--gray-2);
+    font-size: 12px;
+  }
+}

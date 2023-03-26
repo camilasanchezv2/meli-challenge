@@ -1,0 +1,25 @@
+.content-wrapper {
+  width: 100%;
+  padding: 16px;
+
+  .breadcrumb {
+    max-width: 1050px;
+    margin: 0 auto 16px auto;
+
+    .category {
+      color: var(--gray-1);
+      font-size: 14px;
+
+      &:last-child {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .container {
+    max-width: 1050px;
+    background-color: white;
+    border-radius: 4px;
+    margin: 0 auto;
+  }
+}
