@@ -1,7 +1,7 @@
 const express = require("express");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const routes = require("./routes");
+const itemsRoutes = require("./routes/items");
 
 app.get("/", (req, res) => res.send("App is working"));
 
@@ -10,7 +10,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", routes);
+app.use("/api/items", itemsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
