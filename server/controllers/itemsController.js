@@ -24,14 +24,12 @@ const search = (req, res) => {
         };
       });
 
-      const categories = data.filters[0]?.values.map((cat) => cat.name) || [];
-
       const result = {
         author: {
           name: "Camila",
           lastName: "Sánchez",
         },
-        categories,
+        categories: data.filters[0]?.values[0]?.path_from_root,
         items,
       };
 

@@ -5,13 +5,25 @@
   .breadcrumb {
     max-width: 1050px;
     margin: 0 auto 16px auto;
+    display: flex;
+    gap: 6px;
 
     .category {
       color: var(--gray-1);
       font-size: 14px;
+      display: flex;
+      gap: 6px;
+
+      &::after {
+        content: ">";
+      }
 
       &:last-child {
         font-weight: bold;
+
+        &::after {
+          content: "";
+        }
       }
     }
   }

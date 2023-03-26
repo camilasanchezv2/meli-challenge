@@ -5,9 +5,9 @@ export const ContentWrapper = ({ children, breadcrumb = [] }) => {
     <div className="content-wrapper">
       {breadcrumb.length > 0 && (
         <p className="breadcrumb">
-          {breadcrumb.map((category, i) => (
-            <p key={category + i} className="category">
-              {category}
+          {breadcrumb.map(({ name, id }) => (
+            <p key={id} className="category">
+              {name}
             </p>
           ))}
         </p>
