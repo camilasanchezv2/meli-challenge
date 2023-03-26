@@ -1,6 +1,12 @@
 import { useSearchParams } from "react-router-dom";
 
-import { ContentWrapper, ItemCard, Loading, Error } from "../../components";
+import {
+  ContentWrapper,
+  ItemCard,
+  Loading,
+  Error,
+  EmptyState,
+} from "../../components";
 import { useFetch } from "../../hooks";
 
 export const SearchResults = () => {
@@ -17,11 +23,13 @@ export const SearchResults = () => {
 
   return (
     <ContentWrapper breadcrumb={data.categories}>
-      {data.items.length > 0
-        ? data.items
-            .slice(0, 4)
-            .map((item) => <ItemCard key={item.id} item={item} />)
-        : "No Hubieron resultados"}
+      {data.items.length > 0 ? (
+        data.items
+          .slice(0, 4)
+          .map((item) => <ItemCard key={item.id} item={item} />)
+      ) : (
+        <EmptyState />
+      )}
     </ContentWrapper>
   );
 };
