@@ -37,9 +37,14 @@ const search = (req, res) => {
 
       return res.status(200).send(result);
     })
-    .catch((error) => {
-      const status = error.response?.status || 400;
-      return res.status(status).send(error.message);
+    .catch(({ response }) => {
+      const status = response?.status || 400;
+      const error = {
+        error: response?.data.error,
+        message: response?.data.message,
+      };
+
+      return res.status(status).send(error);
     });
 };
 
@@ -79,9 +84,14 @@ const getItem = (req, res) => {
         return res.status(200).send(result);
       })
     )
-    .catch((error) => {
-      const status = error.response?.status || 400;
-      return res.status(status).send(error.message);
+    .catch(({ response }) => {
+      const status = response?.status || 400;
+      const error = {
+        error: response?.data.error,
+        message: response?.data.message,
+      };
+
+      return res.status(status).send(error);
     });
 };
 
