@@ -27,9 +27,9 @@ const search = (req, res) => {
       const result = {
         author: {
           name: "Camila",
-          lastName: "Sánchez",
+          lastname: "Sánchez",
         },
-        categories: data.filters[0]?.values[0]?.path_from_root,
+        categories: data.filters[0]?.values[0]?.path_from_root || [],
         items,
       };
 
@@ -42,6 +42,7 @@ const search = (req, res) => {
         message: response?.data.message,
       };
 
+      console.error(error);
       return res.status(status).send(error);
     });
 };
@@ -67,7 +68,7 @@ const getItem = (req, res) => {
               const result = {
                 author: {
                   name: "Camila",
-                  lastName: "Sánchez",
+                  lastname: "Sánchez",
                 },
                 item: {
                   id,
@@ -81,6 +82,7 @@ const getItem = (req, res) => {
                   condition: dataResponse.condition,
                   free_shipping: dataResponse.free_shipping,
                   sold_quantity: dataResponse.sold_quantity,
+                  free_shipping: dataResponse.shipping.free_shipping,
                   description: descriptionResponse.plain_text,
                   categories: categoryResponse.path_from_root,
                 },
@@ -98,6 +100,7 @@ const getItem = (req, res) => {
         message: response?.data.message,
       };
 
+      console.error(error);
       return res.status(status).send(error);
     });
 };
